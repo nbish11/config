@@ -115,8 +115,6 @@ class Repository implements ArrayAccess {
          */
         protected function load($group)
         {
-                $env = $this->environment;
-
                 // If we've already loaded this collection, we will just bail out since we do
                 // not want to load it again. Once items are loaded a first time they will
                 // stay kept in memory within this class and not loaded from disk again.
@@ -125,7 +123,7 @@ class Repository implements ArrayAccess {
                         return;
                 }
                 
-                $loaded = $this->loader->load($env, $group);
+                $loaded = $this->loader->load($this->environment, $group);
                 
                 if($loaded){
                     $this->items[$group] = $loaded;

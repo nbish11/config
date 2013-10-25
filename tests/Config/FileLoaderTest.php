@@ -1,5 +1,5 @@
 <?php
-use \Ucli\Config\FileLoader;
+use Config\FileLoader;
 
 class FileLoaderTest extends \PHPUnit_Framework_TestCase {
 

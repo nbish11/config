@@ -1,4 +1,4 @@
-<?php namespace Ucli\Config;
+<?php namespace Config;
 
 class FileLoader implements LoaderInterface {
 

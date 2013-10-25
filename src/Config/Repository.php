@@ -1,4 +1,4 @@
-<?php namespace Ucli\Config;
+<?php namespace Config;
 
 use ArrayAccess;
 
@@ -77,7 +77,7 @@ class Repository implements ArrayAccess {
 
                 $this->load($group);
                 
-                return $this->arraySet($this->items, $key, $default);
+                return $this->arrayGet($this->items, $key, $default);
         }
 
         /**
@@ -173,7 +173,7 @@ class Repository implements ArrayAccess {
 		{
 			if ( ! is_array($array) or ! array_key_exists($segment, $array))
 			{
-				return value($default);
+				return $default;
 			}
 
 			$array = $array[$segment];

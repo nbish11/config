@@ -1,7 +1,7 @@
 <?php
 
-use \Ucli\Config\Repository;
-use \Ucli\Config\FileLoader;
+use Config\Repository;
+use Config\FileLoader;
 
 class RepositoryTest extends \PHPUnit_Framework_TestCase {
 

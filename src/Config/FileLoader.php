@@ -55,7 +55,7 @@ class FileLoader implements LoaderInterface {
                 // precedence over them if we are currently in an environments setup.
                 $environmentFile = "{$this->path}/{$environment}/{$group}.php";
 
-                if (is_file($file))
+                if (is_file($environmentFile))
                 {
                         $items = $this->mergeEnvironment($items, $environmentFile);
                 }

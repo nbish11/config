@@ -51,18 +51,6 @@ class Repository implements ArrayAccess {
                 return $this->get($key, $default) !== $default;
         }
 
-        /**
-         * Determine if a configuration group exists.
-         *
-         * @param  string  $key
-         * @return bool
-         */
-        public function hasGroup($key)
-        {
-                list($group, $item) = $this->parseKey($key);
-
-                return $this->loader->exists($group);
-        }
 
         /**
          * Get the specified configuration value.

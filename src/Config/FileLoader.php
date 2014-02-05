@@ -9,15 +9,8 @@ class FileLoader implements LoaderInterface {
          * @var string
          */
         protected $path;
-
-
-        /**
-         * A cache of whether namespaces and groups exists.
-         *
-         * @var array
-         */
-        protected $exists = array();
-
+        
+        
         /**
          * Create a new file configuration loader.
          *
@@ -40,27 +33,41 @@ class FileLoader implements LoaderInterface {
          */
         public function load($environment, $group)
         {
+            
+            $found = false;
 
-                if(!$this->exists($group)) return;
-                
-                // First we'll get the main configuration file for the groups. Once we have
-                // that we can check for any environment specific files, which will get
-                // merged on top of the main arrays to make the environments cascade.
-                $file = "{$this->path}/{$group}.php";
+            $buildPath = '';
 
-                $items = include($file);
+            $items = array();
 
-                // Finally we're ready to check for the environment specific configuration
-                // file which will be merged on top of the main arrays so that they get
+            foreach($this->parseEnvironment($environment) as $env){
+
+                $buildPath .= $env . DIRECTORY_SEPARATOR;
+
+                // Recurse through the directories down the environment specified, checking for the environment specific configuration
+                // files which will be merged on top of the previous files arrays so that they get
                 // precedence over them if we are currently in an environments setup.
-                $environmentFile = "{$this->path}/{$environment}/{$group}.php";
+                $environmentFile = "{$this->path}{$buildPath}{$group}.php";
 
                 if (is_file($environmentFile))
                 {
                         $items = $this->mergeEnvironment($items, $environmentFile);
-                }
 
-                return $items;
+                        $found = true;
+                }
+            }
+
+            return $found ? $items : null;
+        }
+        
+        protected function parseEnvironment($environment)
+        {
+            // Split the environment at dots or slashes
+            $environments = array_filter(preg_split('/(\/|\.)/', $environment));
+            
+            array_unshift($environments, '');
+            
+            return $environments;
         }
 
         /**
@@ -70,37 +77,11 @@ class FileLoader implements LoaderInterface {
          * @param  string  $file
          * @return array
          */
-        protected function mergeEnvironment(array $items, $file)
+        private function mergeEnvironment(array $items, $file)
         {
                 return array_replace_recursive($items, include($file));
         }
-
-        /**
-         * Determine if the given group exists.
-         *
-         * @param  string  $group
-         * @param  string  $namespace
-         * @return bool
-         */
-        public function exists($group)
-        {
-
-                // We'll first check to see if we have determined if this namespace and
-                // group combination have been checked before. If they have, we will
-                // just return the cached result so we don't have to hit the disk.
-                if (isset($this->exists[$group]))
-                {
-                        return $this->exists[$group];
-                }
-
-                $file = "{$this->path}/{$group}.php";
-
-                // Finally, we can simply check if this file exists. We will also cache
-                // the value in an array so we don't have to go through this process
-                // again on subsequent checks for the existing of the config file.
-                
-                return $this->exists[$group] = is_file($file);
-        }
+        
         
         public function getPath()
         {

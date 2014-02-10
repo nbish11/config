@@ -2,6 +2,14 @@
 
 Merge a set of php config arrays from files in nested folders (using `array_replace_recursive`) based on a single enironment setting matching the folder structure you want to load.
 
+### Installation:
+
+via composer - add the package to the require section in your composer.json file:
+
+    "require" : {    
+        "joegreen0991/config"   : "dev-master"
+    }
+
 ### Example:
 
 ~~~
@@ -61,7 +69,7 @@ return array(
 
 $environment = '';
 
-$config = new Repository(new FileLoader(__DIR__ . '/config'), $environment);
+$config = new Config\Repository(new Config\FileLoader(__DIR__ . '/config'), $environment);
 
 var_dump($config['database']);
 /*
@@ -75,7 +83,7 @@ array(
 
 $environment = 'production.server1';
 
-$config = new Repository(new FileLoader(__DIR__ . '/config'), $environment);
+$config = new Config\Repository(new Config\FileLoader(__DIR__ . '/config'), $environment);
 
 var_dump($config['database']);
 /*

@@ -87,3 +87,34 @@ array(
 */
 
 ~~~
+
+
+### Dot notation
+
+You can nest arrays in your config file and access them via the dot notation:
+
+~~~PHP
+<?php
+// in database.php
+
+return array(
+    'connections' => array(
+        'local' => array(
+            'host' => 'localhost'
+        ),
+        'shared' => array(
+            'host' => '10.10.10.1'
+        ),
+        'external' => array(
+            'host' => '156.12.102.1'
+        )
+    )
+);
+
+
+var_dump($config['database.connection.local']);
+
+/*
+string(9) "localhost"
+*/
+~~~

@@ -1,4 +1,4 @@
-##A Config Loader in the style of Laravel 4.0 Config
+##A Simple Config Loader for PHP
 
 Merge a set of php config arrays from files in nested folders (using `array_replace_recursive`) based on a single enironment setting matching the folder structure you want to load.
 

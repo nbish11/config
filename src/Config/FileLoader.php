@@ -34,35 +34,48 @@ class FileLoader implements LoaderInterface {
         public function load($environment, $group)
         {
             
-            $found = false;
-
             $buildPath = '';
 
             $items = array();
 
-            foreach($this->parseEnvironment($environment) as $env){
+            foreach($this->parseEnvironment($environment) as $env)
+            {
 
                 $buildPath .= $env . DIRECTORY_SEPARATOR;
+                
+                $file = "{$this->path}{$buildPath}{$group}.php"
 
-                // Recurse through the directories down the environment specified, checking for the environment specific configuration
-                // files which will be merged on top of the previous files arrays so that they get
+                // Loop through the directories down the environment name, checking for the environment specific 
+                // configuration files which will be merged on top of the previous files arrays so that they get
                 // precedence over them if we are currently in an environments setup.
-                $environmentFile = "{$this->path}{$buildPath}{$group}.php";
-
-                if (is_file($environmentFile))
+                if(is_file($file))
                 {
-                        $items = $this->mergeEnvironment($items, $environmentFile);
-
-                        $found = true;
+                    $items = $this->mergeEnvironment($items, $this->readFile(file));
                 }
             }
 
-            return $found ? $items : null;
+            return $items ?: null;
         }
         
+        /**
+         * Read the file and parse it returning the read array
+         * 
+         * @param  string  $file
+         * @return array
+         */
+        protected function readFile($file)
+        {
+            return include($file);
+        }
+        
+        /**
+         * Split the environment at dots or slashes creating an array of namespaces to look through
+         * 
+         * @param  string  $environment
+         * @return array
+         */
         protected function parseEnvironment($environment)
         {
-            // Split the environment at dots or slashes
             $environments = array_filter(preg_split('/(\/|\.)/', $environment));
             
             array_unshift($environments, '');
@@ -77,15 +90,9 @@ class FileLoader implements LoaderInterface {
          * @param  string  $file
          * @return array
          */
-        private function mergeEnvironment(array $items, $file)
+        protected function mergeEnvironment(array $items1, array $items2)
         {
-                return array_replace_recursive($items, include($file));
-        }
-        
-        
-        public function getPath()
-        {
-            return $this->path;
+                return array_replace_recursive($items, $items2);
         }
 
 }

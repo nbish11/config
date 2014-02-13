@@ -43,7 +43,7 @@ class FileLoader implements LoaderInterface {
 
                 $buildPath .= $env . DIRECTORY_SEPARATOR;
                 
-                $file = "{$this->path}{$buildPath}{$group}.php"
+                $file = "{$this->path}{$buildPath}{$group}.php";
 
                 // Loop through the directories down the environment name, checking for the environment specific 
                 // configuration files which will be merged on top of the previous files arrays so that they get

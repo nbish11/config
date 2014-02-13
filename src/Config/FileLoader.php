@@ -50,7 +50,7 @@ class FileLoader implements LoaderInterface {
                 // precedence over them if we are currently in an environments setup.
                 if(is_file($file))
                 {
-                    $items = $this->mergeEnvironment($items, $this->readFile(file));
+                    $items = $this->mergeEnvironment($items, $this->readFile($file));
                 }
             }
 

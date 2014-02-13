@@ -92,7 +92,7 @@ class FileLoader implements LoaderInterface {
          */
         protected function mergeEnvironment(array $items1, array $items2)
         {
-                return array_replace_recursive($items, $items2);
+                return array_replace_recursive($items1, $items2);
         }
 
 }

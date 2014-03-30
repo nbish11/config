@@ -16,21 +16,15 @@ class FileLoaderTest extends \PHPUnit_Framework_TestCase {
             
             $loader = new FileLoader($dir);
             
-            $this->assertTrue($loader->exists('app'));
+            $this->assertTrue($loader->load('app'));
             
             $loader->exists('app'); // Check cache is used - check code coverage for this
             
-            $this->assertFalse($loader->exists('no_environment'));
+            $this->assertFalse($loader->load('no_environment'));
             
         });
     }
-    
-    public function testGetPath(){
-        
-        $loader = new FileLoader($this->sampleFiles());
-        
-        $this->assertEquals($this->sampleFiles(), $loader->getPath());
-    }
+
     
     public function testFileLoadCanLoadFiles(){
         

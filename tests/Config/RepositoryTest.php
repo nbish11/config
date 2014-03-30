@@ -17,11 +17,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
         $this->specify('The repository can return a group', function() {
             
             $repo = new Repository($this->loader());
-            
-            $this->assertTrue($repo->hasGroup('app'));
-            
-            $this->assertFalse($repo->hasGroup('database'));
-            
+                                    
             $this->assertTrue($repo->has('app'));
             
             $this->assertFalse($repo->has('database'));
@@ -76,7 +72,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
             
             $repo = new Repository($this->loader());
                                     
-            $this->assertSame(include $repo->getLoader()->getPath() . '/app.php', $repo->get('app'));
+            $this->assertSame(include __DIR__ . '/testfiles' . '/app.php', $repo->get('app'));
             
             $new = array(
                 'new' => 'value'
@@ -108,7 +104,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
             
             $repo = new Repository($this->loader());
                                     
-            $this->assertSame(include $repo->getLoader()->getPath() . '/app.php', $repo->get('app'));
+            $this->assertSame(include __DIR__ . '/testfiles' . '/app.php', $repo->get('app'));
             
             $new = array(
                 'new' => 'value'

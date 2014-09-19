@@ -46,9 +46,7 @@ class Repository implements ArrayAccess {
          */
         public function has($key)
         {
-                $default = microtime(true);
-                
-                return $this->get($key, $default) !== $default;
+                return $this->get($key) !== null;
         }
 
 

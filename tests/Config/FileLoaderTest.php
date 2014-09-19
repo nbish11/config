@@ -8,24 +8,7 @@ class FileLoaderTest extends \PHPUnit_Framework_TestCase {
     public function sampleFiles(){
         return __DIR__ . '/testfiles';
     }
-    
-    public function testGroupExistsMethod(){
-        $this->specify('Test loader can check if a group exists', function() {
-            
-            $dir = $this->sampleFiles();
-            
-            $loader = new FileLoader($dir);
-            
-            $this->assertTrue($loader->load('app'));
-            
-            $loader->exists('app'); // Check cache is used - check code coverage for this
-            
-            $this->assertFalse($loader->load('no_environment'));
-            
-        });
-    }
 
-    
     public function testFileLoadCanLoadFiles(){
         
         $this->specify('Test basic file load', function() {

@@ -45,6 +45,40 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
         });
 
     }
+
+    public function testItSetsAndGetsTheLoaderObject(){
+
+        $loader = $this->loader();
+
+        $repo = new Repository($loader,'staging');
+
+        $this->assertSame($repo->getLoader(), $loader);
+
+        $mock = $this->getMockBuilder('Config\FileLoader')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+        $repo->setLoader($mock);
+
+        $repo->getLoader();
+
+        $this->assertSame($repo->getLoader(), $mock);
+
+    }
+
+    public function testItReturnsIsset(){
+
+        $loader = $this->loader();
+
+        $repo = new Repository($loader,'staging');
+
+        $this->assertTrue(isset($repo['app.firstitem']));
+        $this->assertFalse(isset($repo['app.non_existant_item']));
+
+        unset($repo['app.firstitem']);
+        $this->assertFalse(isset($repo['app.firstitem']));
+
+    }
     
     public function testSetEnvironment(){
         
@@ -93,6 +127,10 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
             $repo->set('app.seconditem','new-value');
             
             $this->assertEquals('new-value', $repo->get('app.seconditem'));
+
+            $repo->set('app.sub.item','new-sub-value');
+
+            $this->assertEquals('new-sub-value', $repo->get('app.sub.item'));
             
         });
 

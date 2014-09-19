@@ -3,7 +3,7 @@
 Merge a set of php config arrays from files in nested folders (using `array_replace_recursive`) based on a single environment setting, which matches the folder tree you want to load.
 
 [![Build Status](https://travis-ci.org/joegreen0991/config.svg)](https://travis-ci.org/joegreen0991/config)
-
+[![Coverage Status](https://img.shields.io/coveralls/joegreen0991/config.svg)](https://coveralls.io/r/joegreen0991/config)
 
 ### Installation:
 

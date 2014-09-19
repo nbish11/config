@@ -2,6 +2,9 @@
 
 Merge a set of php config arrays from files in nested folders (using `array_replace_recursive`) based on a single enironment setting matching the folder structure you want to load.
 
+[![Build Status](https://travis-ci.org/joegreen0991/config.svg)](https://travis-ci.org/joegreen0991/config)
+
+
 ### Installation:
 
 via composer - add the package to the require section in your composer.json file:

@@ -7,12 +7,12 @@
             "Config": "src"
          }
     },
-    "minimum-stability": "dev",
-    "require" : {
-       
-    },
+    
+    "minimum-stability": "dist",
+    
     "require-dev" : {
         "phpunit/phpunit" : "*",
-        "codeception/specify" : "*"
+        "codeception/specify" : "*",
+        "satooshi/php-coveralls": "*"
     }
 }

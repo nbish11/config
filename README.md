@@ -16,24 +16,22 @@ via composer - add the package to the require section in your composer.json file
 ### Example:
 
 ~~~
-app
+config
 |
-|__config
-|  |
-|  |____ production
-|  |        |
-|  |        |_______ server1
-|  |        |       |___ redis.php
-|  |        |       |___ database.php
-|  |        |
-|  |        |_______ server2
-|  |        |       |___ database.php
-|  |        |
-|  |        |_______ database.php
-|  |
-|  |____ app.php
-|  |____ database.php
-|  |____ redis.php
+|____ production
+|        |
+|        |_______ server1
+|        |       |___ redis.php
+|        |       |___ database.php
+|        |
+|        |_______ server2
+|        |       |___ database.php
+|        |
+|        |_______ database.php
+|
+|____ app.php
+|____ database.php
+|____ redis.php
 
 ~~~
 

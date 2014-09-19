@@ -8,8 +8,6 @@
          }
     },
     
-    "minimum-stability": "dist",
-    
     "require-dev" : {
         "phpunit/phpunit" : "*",
         "codeception/specify" : "*",

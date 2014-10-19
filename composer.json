@@ -1,5 +1,5 @@
 {
-    "name": "joegreen0991/config",
+    "name": "mrjgreen/config",
     "type": "library",
     "description": "Config component based on laravel's",
     "autoload": {

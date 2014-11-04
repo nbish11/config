@@ -9,6 +9,7 @@
     },
     
     "require-dev" : {
+        "tiesa/ldap": "dev-master",
         "phpunit/phpunit" : "4.2.*",
         "codeception/specify" : "0.*",
         "satooshi/php-coveralls": "0.*"

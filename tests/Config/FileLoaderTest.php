@@ -1,5 +1,5 @@
 <?php
-use Config\FileLoader;
+use Config\Loader\FileLoader;
 
 class FileLoaderTest extends \PHPUnit_Framework_TestCase {
 
@@ -18,8 +18,10 @@ class FileLoaderTest extends \PHPUnit_Framework_TestCase {
             $loader = new FileLoader($dir);
             
             $loaded = $loader->load(null,'app');
+
+            $this->assertCount(0,$loaded);
             
-            $this->assertSame(include $dir . '/app.php', $loaded);
+            $this->assertSame(include $dir . '/app.php', $loaded[0]);
             
         });
         

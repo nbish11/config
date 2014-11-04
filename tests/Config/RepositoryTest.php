@@ -1,7 +1,7 @@
 <?php
 
 use Config\Repository;
-use Config\FileLoader;
+use Config\Loader\FileLoader;
 
 class RepositoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -54,7 +54,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertSame($repo->getLoader(), $loader);
 
-        $mock = $this->getMockBuilder('Config\FileLoader')
+        $mock = $this->getMockBuilder('Config\Loader\FileLoader')
                 ->disableOriginalConstructor()
                 ->getMock();
 

@@ -19,9 +19,7 @@ class FileLoaderTest extends \PHPUnit_Framework_TestCase {
             
             $loaded = $loader->load(null,'app');
 
-            $this->assertCount(0,$loaded);
-            
-            $this->assertSame(include $dir . '/app.php', $loaded[0]);
+            $this->assertSame(include $dir . '/app.php', $loaded);
             
         });
         

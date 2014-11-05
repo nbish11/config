@@ -2,6 +2,7 @@
 
 abstract class LoaderAbstract implements LoaderInterface
 {
+    
     /**
      * Load the given configuration group.
      *
@@ -23,7 +24,7 @@ abstract class LoaderAbstract implements LoaderInterface
             // configuration files which will be merged on top of the previous files arrays so that they get
             // precedence over them if we are currently in an environments setup.
             if (($envItems = $this->readConfig($envParts, $group)) !== null) {
-                $items[] = $envItems;
+                $items = $this->mergeEnvironment($items, $envItems);
             }
         }
 

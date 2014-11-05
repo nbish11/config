@@ -1,6 +1,7 @@
 <?php namespace Config\Loader;
 
-use Toyota\Component\Ldap\Core\Manager;
+use Config\Util\Ldap\Connection;
+use Config\Util\Ldap\Exception\NodeNotFoundException;
 
 class LdapLoader extends LoaderAbstract
 {
@@ -12,20 +13,20 @@ class LdapLoader extends LoaderAbstract
     /**
      * @var null
      */
-    protected $baseDn;
+    protected $environmentDns;
 
 
     /**
      * Create a new file configuration loader.
      *
-     * @param Manager $ldapConnection
-     * @param null $baseDn
+     * @param Connection $ldapConnection
+     * @param array $environmentDns
      */
-    public function __construct(Manager $ldapConnection, $baseDn = null)
+    public function __construct(Connection $ldapConnection, array $environmentDns)
     {
         $this->ldapConnection = $ldapConnection;
 
-        $this->baseDn = $baseDn;
+        $this->environmentDns = $environmentDns;
     }
 
     /**
@@ -35,9 +36,22 @@ class LdapLoader extends LoaderAbstract
      */
     protected function readConfig(array $pathParts, $group)
     {
-        $dn = $this->buildDn(array_reverse($pathParts), $group);
+        $dn = $this->buildDn($pathParts, $group);
 
-        return new Ldap\Accessor($this->ldapConnection->getNode($dn));
+        return $dn ? $this->readNodeValues($dn) : null;
+    }
+
+    /**
+     * @param $dn
+     * @return array
+     */
+    protected function readNodeValues($dn)
+    {
+        try
+        {
+            return $this->ldapConnection->getEntry($dn)->getAttributes();
+
+        }catch(NodeNotFoundException $e) {}
     }
 
     /**
@@ -49,15 +63,12 @@ class LdapLoader extends LoaderAbstract
      */
     protected function buildDn(array $dnParts, $group)
     {
-        $subDn = implode(",dc=", $dnParts);
+        $envDn = implode('.', $dnParts);
 
-        $parts = array_filter(array(
-            "cn=$group",
-            $subDn,
-            $this->baseDn
-        ));
-
-        return implode(',', $parts);
+        if(isset($this->environmentDns[$envDn]))
+        {
+            return "cn=$group," . $this->environmentDns[$envDn];
+        }
     }
 
 }

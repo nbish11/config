@@ -73,10 +73,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
         $repo = new Repository($loader,'staging');
 
         $this->assertTrue(isset($repo['app.firstitem']));
-        $this->assertFalse(isset($repo['app.non_existant_item']));
+        $this->assertFalse(isset($repo['app.non_existent_item']));
 
-        unset($repo['app.firstitem']);
-        $this->assertFalse(isset($repo['app.firstitem']));
+        $repo['app.non_existent_item'] = 1;
+
+        $this->assertTrue(isset($repo['app.non_existent_item']));
+
+        unset($repo['app.non_existent_item']);
+        $this->assertFalse(isset($repo['app.non_existent_item']));
 
     }
     

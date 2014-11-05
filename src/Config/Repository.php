@@ -67,19 +67,16 @@ class Repository implements ArrayAccess
      */
     public function get($key, $default = null)
     {
-        list($group, $i) = $this->parseKey($key);
-
-        $this->load($group);
-
         if ($value = $this->arrayGet($this->setItems, $key, $default)) {
             return $value;
         }
 
-        foreach ($this->items as $item) {
-            if ($value = $this->arrayGet($item, $key, $default)) {
-                return $value;
-            }
-        }
+        list($group, $i) = $this->parseKey($key);
+
+        $this->load($group);
+
+        return $this->arrayGet($this->items, $key, $default);
+
     }
 
     /**
@@ -93,12 +90,9 @@ class Repository implements ArrayAccess
     {
         list($group, $item) = $this->parseKey($key);
 
-        // We'll need to go ahead and lazy load each configuration groups even when
-        // we're just setting a configuration item so that the set item does not
-        // get overwritten if a different item in the group is requested later.
-        $this->load($group);
+        isset($this->setItems[$group]) or $this->setItems[$group] = array();
 
-            $this->arraySet($this->setItems[$group], $item, $value);
+        $this->arraySet($this->setItems[$group], $item, $value);
     }
 
     /**

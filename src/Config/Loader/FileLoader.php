@@ -17,7 +17,7 @@ class FileLoader extends LoaderAbstract
      */
     public function __construct($path)
     {
-        $this->path = $path;
+        $this->path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     }
 
     /**

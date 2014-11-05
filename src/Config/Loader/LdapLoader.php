@@ -63,7 +63,7 @@ class LdapLoader extends LoaderAbstract
      */
     protected function buildDn(array $dnParts, $group)
     {
-        $envDn = implode('.', $dnParts);
+        $envDn = implode('.', array_filter($dnParts));
 
         if(isset($this->environmentDns[$envDn]))
         {

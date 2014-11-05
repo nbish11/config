@@ -522,7 +522,7 @@ class Connection implements ConnectionInterface
     public function getEntry($dn, $attributes = null, $filter = '(objectclass=*)')
     {
         try {
-            $search = $this->connection->search(
+            $search = $this->search(
                 $dn,
                 $filter,
                 $attributes,

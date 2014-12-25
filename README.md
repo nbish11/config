@@ -10,7 +10,7 @@ Merge a set of php config arrays from files in nested folders (using `array_repl
 via composer - add the package to the require section in your composer.json file:
 
     "require" : {    
-        "joegreen0991/config"   : "dev-master"
+        "mrjgreen/config"   : "v2.*"
     }
 
 ### Example:

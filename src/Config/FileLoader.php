@@ -9,14 +9,13 @@ class FileLoader implements LoaderInterface {
          * @var string
          */
         protected $path;
-        
-        
+
+
         /**
          * Create a new file configuration loader.
          *
-         * @param  array  $files
          * @param  string  $path
-         * @return void
+         * @return self
          */
         public function __construct($path)
         {
@@ -28,7 +27,6 @@ class FileLoader implements LoaderInterface {
          *
          * @param  string  $environment
          * @param  string  $group
-         * @param  string  $namespace
          * @return array
          */
         public function load($environment, $group)
@@ -86,8 +84,8 @@ class FileLoader implements LoaderInterface {
         /**
          * Merge the items in the given file into the items.
          *
-         * @param  array   $items
-         * @param  string  $file
+         * @param  array   $items1
+         * @param  array   $items2
          * @return array
          */
         protected function mergeEnvironment(array $items1, array $items2)

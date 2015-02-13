@@ -7,7 +7,7 @@ class Repository implements ArrayAccess {
         /**
          * The loader implementation.
          *
-         * @var \Ucli\Config\LoaderInterface
+         * @var LoaderInterface
          */
         protected $loader;
 
@@ -28,9 +28,9 @@ class Repository implements ArrayAccess {
         /**
          * Create a new configuration repository.
          *
-         * @param  \Illuminate\Config\LoaderInterface  $loader
+         * @param  LoaderInterface  $loader
          * @param  string  $environment
-         * @return void
+         * @return self
          */
         public function __construct(LoaderInterface $loader, $environment = null)
         {
@@ -96,7 +96,6 @@ class Repository implements ArrayAccess {
          * Load the configuration group for the key.
          *
          * @param  string  $group
-         * @param  string  $collection
          * @return void
          */
         protected function load($group)
@@ -124,8 +123,7 @@ class Repository implements ArrayAccess {
         /**
          * Get the collection identifier.
          *
-         * @param  string  $group
-         * @param  string  $namespace
+         * @param  string  $key
          * @return string
          */
         protected function parseKey($key)
@@ -206,7 +204,7 @@ class Repository implements ArrayAccess {
         /**
          * Get the loader implementation.
          *
-         * @return \Illuminate\Config\LoaderInterface
+         * @return LoaderInterface
          */
         public function getLoader()
         {
@@ -216,7 +214,7 @@ class Repository implements ArrayAccess {
         /**
          * Set the loader implementation.
          *
-         * @param \Illuminate\Config\LoaderInterface  $loader
+         * @param LoaderInterface  $loader
          * @return void
          */
         public function setLoader(LoaderInterface $loader)
